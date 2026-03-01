@@ -48,11 +48,11 @@ public class PlayerController : MonoBehaviour
         //dois rester appuyer pour remplir la choppe 
         
         
-        if (Fill == true)
-        {
-            Beer.ThrowBeer();
-        }
-        else
+        //if (Fill == true)
+        //{
+          //  Beer.ThrowBeer();
+        //}
+        //else
         {
         }
     }

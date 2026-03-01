@@ -2,34 +2,19 @@ using UnityEngine;
 
 public class Beer : MonoBehaviour
 {
-    public GameObject beer;
-    public float speed;
-    private Rigidbody2D _rb;
+    public float speed = 8f;
 
-
-    private void Start()
+    void Update()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
-    
-    public void ThrowBeer()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Input.GetButton("Fire1"))
+        if (collision.CompareTag("Customer"))
         {
-            beer =  Instantiate(beer, transform.position, Quaternion.identity);
-            
+            collision.GetComponent<Customer>().Serve();
+            Destroy(gameObject);
         }
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Customer"))
-        {
-            
-        }
-    }
-    public void EmptyBeer()
-    {
-        
     }
 }

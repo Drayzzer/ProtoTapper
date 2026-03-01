@@ -1,42 +1,21 @@
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class CustomerSpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public float spawnInterval = 3f;
-    public Transform[] spawnPoints;
-    public Transform pointA;
-    public Transform pointB;
-    
-    private float timer = 0f;
+    public GameObject customerPrefab;
+    public Transform[] laneSpawnPoints;
+    public float spawnInterval = 2f;
 
-    void Update()
+    void Start()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= spawnInterval)
-        {
-            SpawnEnemy();
-            timer = 0;
-        }
+        InvokeRepeating(nameof(SpawnCustomer), 1f, spawnInterval);
     }
 
-    void SpawnEnemy()
+    void SpawnCustomer()
     {
-        if (spawnPoints.Length == 0) 
-        {
-            return;
-        }
-        
-        int index = Random.Range(0, spawnPoints.Length);
-        Transform selectedspawnPoint = spawnPoints[index];
-        
-        GameObject enemy = Instantiate(enemyPrefab, selectedspawnPoint.position, Quaternion.identity);
-        
-        //if ( != null)
-      //  {
-      //      moveScript.pointA = pointA;
-     //       moveScript.pointB = pointB;
-     //   }
+        if (GameManager.Instance.gameOver) return;
+
+        int lane = Random.Range(0, laneSpawnPoints.Length);
+        Instantiate(customerPrefab, laneSpawnPoints[lane].position, Quaternion.identity);
     }
 }
